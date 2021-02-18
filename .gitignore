@@ -1,2 +1,2 @@
-lab1/build
-lab1/.gradle
+build/
+.gradle/
