@@ -49,4 +49,12 @@ class CosTest {
         assertEquals(-0.5, Fun.cos(-0.66666666 * Math.PI), Fun.PRECISION)
     }
 
+    @Test
+    fun `test values more than PI and less than -PI return NaN`(){
+        assertEquals(Double.NaN, Fun.cos(-Math.PI - 0.00000001), Fun.PRECISION)
+        assertEquals(Double.NaN, Fun.cos(Math.PI + 0.00000001), Fun.PRECISION)
+        assertEquals(Double.NaN, Fun.cos(10 * Math.PI), Fun.PRECISION)
+        assertEquals(Double.NaN, Fun.cos(-100 * Math.PI), Fun.PRECISION)
+    }
+
 }

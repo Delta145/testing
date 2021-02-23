@@ -1,5 +1,6 @@
 package ru.itmo
 
+import kotlin.math.PI
 import kotlin.math.abs
 import kotlin.math.pow
 
@@ -28,6 +29,8 @@ object Fun {
     }
 
     fun cos(x: Double): Double {
+        if (abs(x) > PI)
+            return Double.NaN
         var result = 0.0
         var current = 10.0
         var prev = 0.0
