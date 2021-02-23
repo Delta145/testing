@@ -22,7 +22,12 @@ class HashTest {
         assertEquals(surname, hashTable.get("surName"))
         assertEquals(name, hashTable.get("name"))
 
-        val expectedActions = listOf("bucket2", "insert2:0", "bucket0", "insert0:0", "bucket2", "found2:0", "bucket0", "found0:0")
+        val expectedActions = listOf(
+            "bucket2", "insert2:0",
+            "bucket0", "insert0:0",
+            "bucket2", "found2:0",
+            "bucket0", "found0:0",
+        )
         assertEquals(expectedActions, hashTable.actions)
     }
 
@@ -34,7 +39,12 @@ class HashTest {
         hashTable.delete("name")
         assertEquals(null, hashTable.get("name"))
 
-        val expectedActions = listOf("bucket0", "insert0:0", "bucket0", "found0:0", "bucket0", "removed0:0", "bucket0", "found0:null")
+        val expectedActions = listOf(
+            "bucket0", "insert0:0",
+            "bucket0", "found0:0",
+            "bucket0", "removed0:0",
+            "bucket0", "found0:null",
+        )
         assertEquals(expectedActions, hashTable.actions)
     }
 
@@ -46,7 +56,11 @@ class HashTest {
         hashTable.put("name", newName)
         assertEquals(newName, hashTable.get("name"))
 
-        val expectedActions = listOf("bucket0", "insert0:0", "bucket0", "replace0:0", "bucket0", "found0:0")
+        val expectedActions = listOf(
+            "bucket0", "insert0:0",
+            "bucket0", "replace0:0",
+            "bucket0", "found0:0",
+        )
         assertEquals(expectedActions, hashTable.actions)
     }
 
@@ -57,8 +71,16 @@ class HashTest {
         strs.forEach { s -> hashTable.put(s, s) }
         strs.forEach { s -> assertEquals(s, hashTable.get(s)) }
 
-        val expectedActions = listOf("bucket0", "insert0:0", "bucket1", "insert1:0", "bucket2", "insert2:0", "bucket0", "insert0:1",
-        "bucket0", "found0:0", "bucket1", "found1:0", "bucket2", "found2:0", "bucket0", "found0:1")
+        val expectedActions = listOf(
+            "bucket0", "insert0:0",
+            "bucket1", "insert1:0",
+            "bucket2", "insert2:0",
+            "bucket0", "insert0:1",
+            "bucket0", "found0:0",
+            "bucket1", "found1:0",
+            "bucket2", "found2:0",
+            "bucket0", "found0:1",
+        )
         assertEquals(expectedActions, hashTable.actions)
     }
 
@@ -69,12 +91,28 @@ class HashTest {
 
         val expectedActions = mutableListOf<String>()
         strsToDelete.plus(strsToCheck).forEach { s -> hashTable.put(s, s) }
-        expectedActions.addAll(listOf("bucket2", "insert2:0", "bucket0", "insert0:0", "bucket1", "insert1:0", "bucket2", "insert2:1",
-            "bucket2", "insert2:2", "bucket0", "insert0:1", "bucket1", "insert1:1"))
+        expectedActions.addAll(listOf(
+            "bucket2", "insert2:0",
+            "bucket0", "insert0:0",
+            "bucket1", "insert1:0",
+            "bucket2", "insert2:1",
+            "bucket2", "insert2:2",
+            "bucket0", "insert0:1",
+            "bucket1", "insert1:1",
+        ))
         strsToDelete.forEach { s -> hashTable.delete(s) }
-        expectedActions.addAll(listOf("bucket2", "removed2:0", "bucket0", "removed0:0", "bucket1", "removed1:0", "bucket2", "removed2:0"))
+        expectedActions.addAll(listOf(
+            "bucket2", "removed2:0",
+            "bucket0", "removed0:0",
+            "bucket1", "removed1:0",
+            "bucket2", "removed2:0",
+        ))
         strsToCheck.forEach { s -> assertEquals(s, hashTable.get(s)) }
-        expectedActions.addAll(listOf("bucket2", "found2:0", "bucket0", "found0:0", "bucket1", "found1:0"))
+        expectedActions.addAll(listOf(
+            "bucket2", "found2:0",
+            "bucket0", "found0:0",
+            "bucket1", "found1:0",
+        ))
 
         assertEquals(expectedActions, hashTable.actions)
     }
@@ -90,8 +128,15 @@ class HashTest {
         assertEquals(null, hashTable.get(strs[1]))
         assertEquals(strs[2], hashTable.get(strs[2]))
 
-        val expectedActions = listOf("bucket0", "insert0:0", "bucket0", "insert0:1", "bucket0", "insert0:2",
-        "bucket0", "removed0:1", "bucket0", "found0:0", "bucket0", "found0:null", "bucket0", "found0:1")
+        val expectedActions = listOf(
+            "bucket0", "insert0:0",
+            "bucket0", "insert0:1",
+            "bucket0", "insert0:2",
+            "bucket0", "removed0:1",
+            "bucket0", "found0:0",
+            "bucket0", "found0:null",
+            "bucket0", "found0:1",
+        )
 
         assertEquals(expectedActions, hashTable.actions)
     }
