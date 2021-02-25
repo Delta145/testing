@@ -1,51 +1,69 @@
 package ru.itmo
 
-import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
-import ru.itmo.domain.*
+import ru.itmo.domain_new.*
 
 class DomainTest {
+
     @Test
-    fun `check Arthur state is anxious if Ford suggested to put in a ear the bottle with a small fish`() {
-        val fish = BetelgeuseFish("yellow", FishSize.SMALL)
-        val bottle = BetelgeuseGlassBottle(fish)
-        val ford = BetelgeuseMan("Ford", bottle, 0.0)
-        val arthur = Human("Arthur", 0.0)
-        ford.suggestPutInEar(arthur)
-        assertEquals(HumanState.ANXIOUS, arthur.state)
+    fun `Ford cannot take another thing if he is already holding something`() {
+        val bottleWithFish = AlienThing("стеклянный флакончик,", "в котором плавала, переливаясь, маленькая желтая рыбка.")
+        val ford = BetelgeuseMan("Форд")
+        ford.takeThing(bottleWithFish)
+        val emptyBottle = AlienThing("Пустой флакончик", "")
+        val takeThing = ford.takeThing(emptyBottle)
+        assertFalse(takeThing.isSuccess)
     }
 
     @Test
-    fun `check Arthur state is confident if he looked at CornFlakes(weight=500) after Ford suggestion`() {
-        val fish = BetelgeuseFish("yellow", FishSize.SMALL)
-        val bottle = BetelgeuseGlassBottle(fish)
-        val ford = BetelgeuseMan("Ford", bottle, 0.0)
-        val arthur = Human("Arthur", 0.0)
-        ford.suggestPutInEar(arthur)
-        val cornFlakes = CornFlakes(500.0)
-        arthur.lookAt(cornFlakes)
-        assertEquals(HumanState.CONFIDENT, arthur.state)
+    fun `Arthur is confident if looked at cornflakes`() {
+        val arthur = Human("Артур")
+        assertFalse(arthur.isConfident)
+        val lookActionResult = arthur.lookAt(EarthThing("Пакет кукурзных хлопьев"))
+        assertTrue(lookActionResult.isSuccess)
+        assertTrue(arthur.isConfident)
     }
 
     @Test
-    fun `check Arthur state is MADNESS if Ford suggested to put in a ear the bottle with a LAARGE fish`() {
-        val fish = BetelgeuseFish("yellow", FishSize.LARGE)
-        val bottle = BetelgeuseGlassBottle(fish)
-        val ford = BetelgeuseMan("Ford", bottle, 0.0)
-        val arthur = Human("Arthur", 0.0)
-        ford.suggestPutInEar(arthur)
-        assertEquals(HumanState.MADNESS, arthur.state)
+    fun `Arthur is confident if environment contains cornflakes`() {
+        val arthur = Human("Артур")
+        assertFalse(arthur.isConfident)
+        val bottleWithFish = AlienThing("стеклянный флакончик,", "в котором плавала, переливаясь, маленькая желтая рыбка.")
+        val ford = BetelgeuseMan("Форд")
+        ford.takeThing(bottleWithFish)
+        val dentrassi = AlienThing("нижнее бельё", "дентрасси")
+        val matrix = AlienThing("скворншельскими матрицами", "")
+
+        val env = Environment(dentrassi, matrix, ford, EarthThing("Пакет кукурзных хлопьев"))
+        arthur.analyzeEnv(env)
+        assertTrue(arthur.isConfident)
     }
 
     @Test
-    fun `check betelgeuse man stress resistance after looking at 10 humans`() {
-        val fish = BetelgeuseFish("yellow", FishSize.LARGE)
-        val bottle = BetelgeuseGlassBottle(fish)
-        val ford = BetelgeuseMan("Ford", bottle, 0.0)
-        val humans = (1..10).asIterable().map { i ->
-            Human("human $i", 0.0)
-        }
-        humans.forEach { h -> ford.lookAt(h) }
-        assertEquals(BetelgeuseManState.CONFIDENT, ford.state)
+    fun `check and print main plot`() {
+        val bottleWithFish = AlienThing("стеклянный флакончик,", "в котором плавала, переливаясь, маленькая желтая рыбка.")
+        val ford = BetelgeuseMan("Форд")
+        val takeActionResult = ford.takeThing(bottleWithFish)
+        assertTrue(takeActionResult.isSuccess)
+        assertEquals(ford.holdingThing, bottleWithFish)
+        println(takeActionResult.resultDescription)
+
+        val arthur = Human("Артур", true)
+        assertTrue(arthur.isConfident)
+        val lookActionResult = arthur.lookAt(ford)
+        assertTrue(lookActionResult.isSuccess)
+        assertFalse(arthur.isConfident)
+        println(lookActionResult.resultDescription)
+        println(arthur.getStateDescription())
+
+        val dentrassi = AlienThing("нижнее бельё", "дентрасси")
+        val matrix = AlienThing("скворншельскими матрицами", "")
+
+        val env = Environment(dentrassi, matrix, ford, null)
+        val analyzeResult = arthur.analyzeEnv(env)
+        assertFalse(arthur.isConfident)
+        println(analyzeResult)
     }
+
 }
