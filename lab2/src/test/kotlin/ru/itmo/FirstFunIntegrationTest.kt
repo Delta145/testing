@@ -11,6 +11,7 @@ import kotlin.test.assertFailsWith
 
 class FirstFunIntegrationTest {
     companion object {
+        private const val accuracy = 1e-5
         private lateinit var firstFun: FirstFun
         @BeforeAll
         @JvmStatic
@@ -27,19 +28,19 @@ class FirstFunIntegrationTest {
             Mockito.`when`(csc(-6.1)).thenReturn(5.48960)
             Mockito.`when`(csc(-10 * PI)).thenThrow(IllegalArgumentException(""))
 
-            firstFun = FirstFun(1e-5, csc)
+            firstFun = FirstFun(accuracy, csc)
         }
     }
 
     @Test
     fun test_left() {
-        assertEquals(-1005.0141969, firstFun(-0.1), 1e-5)
-        assertEquals(-8.0, firstFun(-PI /6), 1e-5)
-        assertEquals(-1.0, firstFun(-PI /2), 1e-5)
-        assertEquals(-73.021, firstFun(-2.9), 1e-5)
-        assertEquals(23.167733, firstFun(-3.5), 1e-5)
-        assertEquals(1.0, firstFun(-3* PI /2), 1e-5)
-        assertEquals(165.43298, firstFun(-6.1), 1e-5)
+        assertEquals(-1005.0141969, firstFun(-0.1), accuracy)
+        assertEquals(-8.0, firstFun(-PI /6), accuracy)
+        assertEquals(-1.0, firstFun(-PI /2), accuracy)
+        assertEquals(-73.021, firstFun(-2.9), accuracy)
+        assertEquals(23.167733, firstFun(-3.5), accuracy)
+        assertEquals(1.0, firstFun(-3* PI /2), accuracy)
+        assertEquals(165.43298, firstFun(-6.1), accuracy)
 
         assertFailsWith<IllegalArgumentException> {
             firstFun(0.0)

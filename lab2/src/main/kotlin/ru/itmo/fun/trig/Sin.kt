@@ -22,8 +22,8 @@ open class Sin(accuracy: Double) : Fun(accuracy) {
             x
     }
 
-    override fun invoke(input: Double): Double {
-        val x = shortenRange(input)
+    override fun invoke(x: Double): Double {
+        val x = shortenRange(x)
         if (accuracy <= 0)
             throw IllegalArgumentException("Accuracy should be positive")
         val tailor = { n: Int ->

@@ -1,5 +1,6 @@
 package ru.itmo
 
+import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.Test
 import org.mockito.Mockito
@@ -7,12 +8,12 @@ import ru.itmo.`fun`.system.FirstFun
 import ru.itmo.`fun`.system.SecondFun
 import ru.itmo.`fun`.system.SystemFun
 import kotlin.math.PI
-import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
 
 
 class SystemFunIntegrationTest {
     companion object {
+        private const val accuracy = 1e-5
         private lateinit var systemFun: SystemFun
         @BeforeAll
         @JvmStatic
@@ -40,19 +41,19 @@ class SystemFunIntegrationTest {
             Mockito.`when`(secondFun(10.5)).thenReturn(7.67654)
             Mockito.`when`(secondFun(100.5)).thenReturn(37.6651)
 
-            systemFun = SystemFun(1e-10, firstFun, secondFun)
+            systemFun = SystemFun(accuracy, firstFun, secondFun)
         }
     }
 
     @Test
     fun test_left() {
-        assertEquals(-1005.01, systemFun(-0.1))
-        assertEquals(-8.0, systemFun(-PI/6))
-        assertEquals(-1.0, systemFun(-PI/2))
-        assertEquals(-73.021, systemFun(-2.9))
-        assertEquals(23.1677, systemFun(-3.5))
-        assertEquals(1.0, systemFun(-3*PI/2))
-        assertEquals(165.433, systemFun(-6.1))
+        assertEquals(-1005.01, systemFun(-0.1), accuracy)
+        assertEquals(-8.0, systemFun(-PI/6), accuracy)
+        assertEquals(-1.0, systemFun(-PI/2), accuracy)
+        assertEquals(-73.021, systemFun(-2.9), accuracy)
+        assertEquals(23.1677, systemFun(-3.5), accuracy)
+        assertEquals(1.0, systemFun(-3*PI/2), accuracy)
+        assertEquals(165.433, systemFun(-6.1), accuracy)
 
         assertFailsWith<IllegalArgumentException> {
             systemFun(0.0)
@@ -67,14 +68,14 @@ class SystemFunIntegrationTest {
 
     @Test
     fun test_right() {
-        assertEquals(50.8629, systemFun(0.01))
-        assertEquals(13.9107, systemFun(0.1))
-        assertEquals(0.00004, systemFun(0.74129))
-        assertEquals(-0.867388, systemFun(1.4))
-        assertEquals(-0.60548, systemFun(2.0))
-        assertEquals(0.000058, systemFun(2.669))
-        assertEquals(0.889, systemFun(3.5))
-        assertEquals(7.67654, systemFun(10.5))
-        assertEquals(37.6651, systemFun(100.5))
+        assertEquals(50.8629, systemFun(0.01), accuracy)
+        assertEquals(13.9107, systemFun(0.1), accuracy)
+        assertEquals(0.00004, systemFun(0.74129), accuracy)
+        assertEquals(-0.867388, systemFun(1.4), accuracy)
+        assertEquals(-0.60548, systemFun(2.0), accuracy)
+        assertEquals(0.000058, systemFun(2.669), accuracy)
+        assertEquals(0.889, systemFun(3.5), accuracy)
+        assertEquals(7.67654, systemFun(10.5), accuracy)
+        assertEquals(37.6651, systemFun(100.5), accuracy)
     }
 }

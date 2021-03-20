@@ -12,6 +12,7 @@ import ru.itmo.`fun`.system.SecondFun
 
 class SecondFunIntegrationTest {
     companion object {
+        private const val accuracy = 1e-5
         private lateinit var secondFun: SecondFun
         @BeforeAll
         @JvmStatic
@@ -61,20 +62,20 @@ class SecondFunIntegrationTest {
             Mockito.`when`(log10(10.5)).thenReturn(1.02118929906993807279350526712325847591551137)
             Mockito.`when`(log10(100.5)).thenReturn(2.002166061756508)
 
-            secondFun = SecondFun(1e-5, ln, log2, log5, log10)
+            secondFun = SecondFun(accuracy, ln, log2, log5, log10)
         }
     }
 
     @Test
     fun test_right() {
-        assertEquals(50.86286, secondFun(0.01), 1e-5)
-        assertEquals(13.9107, secondFun(0.1), 1e-5)
-        assertEquals(0.00004, secondFun(0.74129), 1e-5)
-        assertEquals(-0.867388, secondFun(1.4), 1e-5)
-        assertEquals(-0.60548, secondFun(2.0), 1e-5)
-        assertEquals(0.000058, secondFun(2.669), 1e-5)
-        assertEquals(0.889607, secondFun(3.5), 1e-5)
-        assertEquals(7.67654, secondFun(10.5), 1e-5)
-        assertEquals(37.665139, secondFun(100.5), 1e-5)
+        assertEquals(50.86286, secondFun(0.01), accuracy)
+        assertEquals(13.9107, secondFun(0.1), accuracy)
+        assertEquals(0.00004, secondFun(0.74129), accuracy)
+        assertEquals(-0.867388, secondFun(1.4), accuracy)
+        assertEquals(-0.60548, secondFun(2.0), accuracy)
+        assertEquals(0.000058, secondFun(2.669), accuracy)
+        assertEquals(0.889607, secondFun(3.5), accuracy)
+        assertEquals(7.67654, secondFun(10.5), accuracy)
+        assertEquals(37.665139, secondFun(100.5), accuracy)
     }
 }
