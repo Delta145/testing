@@ -5,7 +5,7 @@ import kotlin.math.PI
 import kotlin.math.abs
 import kotlin.math.pow
 
-class Sin(accuracy: Double) : Fun(accuracy) {
+open class Sin(accuracy: Double) : Fun(accuracy) {
 
     private fun fact(num: Int): Long =
         if (num > 1) fact(num - 1) * num else 1
