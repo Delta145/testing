@@ -3,9 +3,8 @@ package ru.itmo.`fun`.log
 import ru.itmo.`fun`.Fun
 import kotlin.math.pow
 
-class Ln(accuracy: Double) : Fun(accuracy) {
-    override fun invoke(input: Double): Double {
-        val x = input
+open class Ln(accuracy: Double) : Fun(accuracy) {
+    override fun invoke(x: Double): Double {
         if (accuracy <= 0.0 || x < 0.0)
             throw IllegalArgumentException("Accuracy should be positive")
         if (x == 0.0)

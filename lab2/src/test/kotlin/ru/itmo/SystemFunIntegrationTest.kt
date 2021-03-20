@@ -32,13 +32,11 @@ class SystemFunIntegrationTest {
 
             Mockito.`when`(secondFun(0.01)).thenReturn(50.8629)
             Mockito.`when`(secondFun(0.1)).thenReturn(13.9107)
-            Mockito.`when`(secondFun(0.1)).thenReturn(13.9107)
             Mockito.`when`(secondFun(0.74129)).thenReturn(0.00004)
             Mockito.`when`(secondFun(1.4)).thenReturn(-0.867388)
             Mockito.`when`(secondFun(2.0)).thenReturn(-0.60548)
             Mockito.`when`(secondFun(2.669)).thenReturn(0.000058)
             Mockito.`when`(secondFun(3.5)).thenReturn(0.889)
-            Mockito.`when`(secondFun(10.5)).thenReturn(7.67654)
             Mockito.`when`(secondFun(10.5)).thenReturn(7.67654)
             Mockito.`when`(secondFun(100.5)).thenReturn(37.6651)
 
@@ -71,13 +69,11 @@ class SystemFunIntegrationTest {
     fun test_right() {
         assertEquals(50.8629, systemFun(0.01))
         assertEquals(13.9107, systemFun(0.1))
-        assertEquals(13.9107, systemFun(0.1))
         assertEquals(0.00004, systemFun(0.74129))
         assertEquals(-0.867388, systemFun(1.4))
         assertEquals(-0.60548, systemFun(2.0))
         assertEquals(0.000058, systemFun(2.669))
         assertEquals(0.889, systemFun(3.5))
-        assertEquals(7.67654, systemFun(10.5))
         assertEquals(7.67654, systemFun(10.5))
         assertEquals(37.6651, systemFun(100.5))
     }
