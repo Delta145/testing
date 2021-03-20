@@ -1,6 +1,6 @@
 package ru.itmo.domain_new
 
-data class EarthThing(
+class EarthThing(
     val thingName: String,
 )
 

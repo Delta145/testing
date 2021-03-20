@@ -2,6 +2,8 @@ package ru.itmo
 
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.params.ParameterizedTest
+import org.junit.jupiter.params.provider.CsvFileSource
 
 class CosTest {
 
@@ -55,6 +57,12 @@ class CosTest {
         assertEquals(Double.NaN, Fun.cos(Math.PI + 0.00000001), Fun.PRECISION)
         assertEquals(Double.NaN, Fun.cos(10 * Math.PI), Fun.PRECISION)
         assertEquals(Double.NaN, Fun.cos(-100 * Math.PI), Fun.PRECISION)
+    }
+
+    @ParameterizedTest
+    @CsvFileSource(resources = ["/cos.csv"])
+    fun `Cos param test`(expected: Double, x: Double){
+        assertEquals(expected, Fun.cos(x), Fun.PRECISION)
     }
 
 }

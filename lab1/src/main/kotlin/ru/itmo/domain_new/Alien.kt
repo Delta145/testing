@@ -1,6 +1,6 @@
 package ru.itmo.domain_new
 
-data class AlienThing(
+class AlienThing(
     val thingName: String,
     val thingDescription: String,
 ) {
