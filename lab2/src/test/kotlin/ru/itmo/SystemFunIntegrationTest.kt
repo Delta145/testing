@@ -31,15 +31,15 @@ class SystemFunIntegrationTest {
             Mockito.`when`(firstFun(-6.1)).thenReturn(165.433)
             Mockito.`when`(firstFun(-10 * PI)).thenThrow(IllegalArgumentException(""))
 
-            Mockito.`when`(secondFun(0.01)).thenReturn(50.8629)
-            Mockito.`when`(secondFun(0.1)).thenReturn(13.9107)
-            Mockito.`when`(secondFun(0.74129)).thenReturn(0.00004)
+            Mockito.`when`(secondFun(0.01)).thenReturn(50.8628678169)
+            Mockito.`when`(secondFun(0.1)).thenReturn(13.91067980077366544)
+            Mockito.`when`(secondFun(0.74129)).thenReturn(0.0000401395)
             Mockito.`when`(secondFun(1.4)).thenReturn(-0.867388)
-            Mockito.`when`(secondFun(2.0)).thenReturn(-0.60548)
+            Mockito.`when`(secondFun(2.0)).thenReturn(-0.60548743985918544104309)
             Mockito.`when`(secondFun(2.669)).thenReturn(0.000058)
-            Mockito.`when`(secondFun(3.5)).thenReturn(0.889)
-            Mockito.`when`(secondFun(10.5)).thenReturn(7.67654)
-            Mockito.`when`(secondFun(100.5)).thenReturn(37.6651)
+            Mockito.`when`(secondFun(3.5)).thenReturn(0.889608)
+            Mockito.`when`(secondFun(10.5)).thenReturn(7.6765352163453698)
+            Mockito.`when`(secondFun(100.5)).thenReturn(37.66513949162945594)
 
             systemFun = SystemFun(accuracy, firstFun, secondFun)
         }
@@ -68,14 +68,14 @@ class SystemFunIntegrationTest {
 
     @Test
     fun test_right() {
-        assertEquals(50.8629, systemFun(0.01), accuracy)
-        assertEquals(13.9107, systemFun(0.1), accuracy)
-        assertEquals(0.00004, systemFun(0.74129), accuracy)
+        assertEquals(50.8628678169, systemFun(0.01), accuracy)
+        assertEquals(13.91067980077366544, systemFun(0.1), accuracy)
+        assertEquals(0.0000401395, systemFun(0.74129), accuracy)
         assertEquals(-0.867388, systemFun(1.4), accuracy)
-        assertEquals(-0.60548, systemFun(2.0), accuracy)
+        assertEquals(-0.60548743985918544104309, systemFun(2.0), accuracy)
         assertEquals(0.000058, systemFun(2.669), accuracy)
-        assertEquals(0.889, systemFun(3.5), accuracy)
-        assertEquals(7.67654, systemFun(10.5), accuracy)
-        assertEquals(37.6651, systemFun(100.5), accuracy)
+        assertEquals(0.889608, systemFun(3.5), accuracy)
+        assertEquals(7.6765352163453698, systemFun(10.5), accuracy)
+        assertEquals(37.66513949162945594, systemFun(100.5), accuracy)
     }
 }

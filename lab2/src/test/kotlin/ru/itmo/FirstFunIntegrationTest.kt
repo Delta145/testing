@@ -18,6 +18,7 @@ class FirstFunIntegrationTest {
         fun setup() {
             val csc = Mockito.mock(Csc::class.java)
             Mockito.`when`(csc(0.0)).thenThrow(IllegalArgumentException(""))
+            Mockito.`when`(csc(-0.01)).thenReturn(-100.001666686111316)
             Mockito.`when`(csc(-0.1)).thenReturn(-10.016686131634776)
             Mockito.`when`(csc(-PI / 6)).thenReturn(-2.0)
             Mockito.`when`(csc(-PI / 2)).thenReturn(-1.0)
@@ -34,6 +35,7 @@ class FirstFunIntegrationTest {
 
     @Test
     fun test_left() {
+        assertEquals(-1000050.001416697, firstFun(-0.01), accuracy)
         assertEquals(-1005.0141969, firstFun(-0.1), accuracy)
         assertEquals(-8.0, firstFun(-PI /6), accuracy)
         assertEquals(-1.0, firstFun(-PI /2), accuracy)
