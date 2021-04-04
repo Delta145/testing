@@ -67,13 +67,21 @@ class SecondFunIntegrationTest {
     }
 
     @Test
-    fun test_right() {
+    fun `left side test`() {
         assertEquals(50.86286, secondFun(0.01), accuracy)
         assertEquals(13.9107, secondFun(0.1), accuracy)
         assertEquals(0.00004, secondFun(0.74129), accuracy)
+    }
+
+    @Test
+    fun `center test`() {
         assertEquals(-0.867388, secondFun(1.4), accuracy)
         assertEquals(-0.60548, secondFun(2.0), accuracy)
         assertEquals(0.000058, secondFun(2.669), accuracy)
+    }
+
+    @Test
+    fun `right side test`() {
         assertEquals(0.889607, secondFun(3.5), accuracy)
         assertEquals(7.67654, secondFun(10.5), accuracy)
         assertEquals(37.665139, secondFun(100.5), accuracy)
