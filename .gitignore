@@ -3,3 +3,5 @@ build/
 target/
 .idea/
 out/
+chromedriver.exe
+gradle/

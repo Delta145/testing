@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Cookie;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -12,8 +13,9 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
+import java.util.Date;
 
-public class LoginTest {
+public class CheckLoyaltyProgramTest {
     private static WebDriver driver;
     static JavascriptExecutor js;
 
@@ -31,9 +33,11 @@ public class LoginTest {
     }
 
     @Test
-    public void login() {
+    public void checkLoyaltyProgramTest() {
         driver.get("https://www.lamoda.ru/");
         driver.manage().window().maximize();
+        // accept cookies
+        driver.findElement(By.xpath("//button[contains(text(),'Хорошо')]")).click();
         driver.findElement(By.xpath("//a[contains(text(),'Войти')]")).click();
         driver.findElement(By.xpath("//input[contains(@placeholder,'email')]")).click();
         driver.findElement(By.xpath("//input[contains(@placeholder,'email')]")).sendKeys("sawin.georgij@yandex.ru");
@@ -46,5 +50,8 @@ public class LoginTest {
             wait.until(ExpectedConditions.numberOfElementsToBe(By.xpath("//iframe[contains(@title, 'captcha')]"), 0));
         }
         Assertions.assertTrue(driver.findElement(By.xpath("//a[contains(text(),'Профиль')]")).isDisplayed());
+        driver.findElement(By.xpath("//a[contains(text(),'Профиль')]")).click();
+        driver.findElement(By.xpath("//a[contains(text(),'Программа лояльности')]")).click();
+        Assertions.assertTrue(driver.findElement(By.xpath("//div[contains(text(),'Программа скидок и бонусов Lamoda Club')]")).isDisplayed());
     }
 }

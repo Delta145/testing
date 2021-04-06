@@ -13,7 +13,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
-public class LoginTest {
+public class CheckPersonalDataTest {
     private static WebDriver driver;
     static JavascriptExecutor js;
 
@@ -31,9 +31,11 @@ public class LoginTest {
     }
 
     @Test
-    public void login() {
+    public void checkQAListTest() {
         driver.get("https://www.lamoda.ru/");
         driver.manage().window().maximize();
+        // accept cookies
+        driver.findElement(By.xpath("//button[contains(text(),'Хорошо')]")).click();
         driver.findElement(By.xpath("//a[contains(text(),'Войти')]")).click();
         driver.findElement(By.xpath("//input[contains(@placeholder,'email')]")).click();
         driver.findElement(By.xpath("//input[contains(@placeholder,'email')]")).sendKeys("sawin.georgij@yandex.ru");
@@ -46,5 +48,8 @@ public class LoginTest {
             wait.until(ExpectedConditions.numberOfElementsToBe(By.xpath("//iframe[contains(@title, 'captcha')]"), 0));
         }
         Assertions.assertTrue(driver.findElement(By.xpath("//a[contains(text(),'Профиль')]")).isDisplayed());
+        driver.findElement(By.xpath("//a[contains(text(),'Профиль')]")).click();
+        driver.findElement(By.xpath("//a[contains(text(),'Мои данные')]")).click();
+        Assertions.assertTrue(driver.findElement(By.xpath("//div[contains(text(),'Мои данные')]")).isDisplayed());
     }
 }
