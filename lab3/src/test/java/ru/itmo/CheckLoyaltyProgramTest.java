@@ -15,14 +15,16 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
 import java.util.Date;
 
+import static ru.itmo.DriverConfig.getCurrentDriver;
+import static ru.itmo.PropertyNames.CHROME_DRIVER;
+
 public class CheckLoyaltyProgramTest {
     private static WebDriver driver;
     static JavascriptExecutor js;
 
     @BeforeAll
     public static void setUp() {
-        System.setProperty("webdriver.chrome.driver", "C:\\Study\\testing\\chromedriver.exe");
-        driver = new ChromeDriver();
+        driver = getCurrentDriver();
         js = (JavascriptExecutor) driver;
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(3));
     }
