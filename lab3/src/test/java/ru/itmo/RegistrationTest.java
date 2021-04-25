@@ -6,12 +6,10 @@ import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 
 import java.time.Duration;
 
 import static ru.itmo.DriverConfig.getCurrentDriver;
-import static ru.itmo.PropertyNames.CHROME_DRIVER;
 
 public class RegistrationTest {
     private static WebDriver driver;

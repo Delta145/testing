@@ -1,9 +1,6 @@
 package ru.itmo;
 
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Cookie;
 import org.openqa.selenium.JavascriptExecutor;
@@ -34,6 +31,7 @@ public class CheckLoyaltyProgramTest {
         driver.quit();
     }
 
+    @Disabled("Требует успешной аутентификации")
     @Test
     public void checkLoyaltyProgramTest() {
         driver.get("https://www.lamoda.ru/");
